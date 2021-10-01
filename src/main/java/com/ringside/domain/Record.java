@@ -50,6 +50,12 @@ public class Record {
 		super();
 
 	}
+	public Record(Long id, String winner) {
+		super();
+		this.id = id;
+		this.winner = winner;
+	
+	}
 
 	public Long getId() {
 		return id;

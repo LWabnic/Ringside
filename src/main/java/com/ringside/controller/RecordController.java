@@ -125,11 +125,11 @@ public class RecordController {
 	public ResponseEntity<Boolean> deleteR(@PathVariable Long id) {
 		return new ResponseEntity<Boolean>(this.service.deleteId(id), HttpStatus.NO_CONTENT);
 	}
-//	//Find by name
-//	@GetMapping("/readname/{name}")
-//	public ResponseEntity<List<Person>>findByName(@PathVariable String name){
-//		return new ResponseEntity<List<Person>>(this.service.findByName(name),HttpStatus.OK);
-//	}
+	//Find by name
+	@GetMapping("/readname/{name}")
+	public ResponseEntity<List<Record>>findByName(@PathVariable String name){
+		return new ResponseEntity<List<Record>>(this.service.findByName(name),HttpStatus.OK);
+	}
 //	//create
 //	@PostMapping("/createDTO")
 //	public ResponseEntity<PersonDTO>createDTO(@RequestBody PersonDTO p){

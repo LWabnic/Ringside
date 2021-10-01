@@ -85,9 +85,9 @@ public class RecordService {
 	}
 
 	// Find by name
-//	public List<Person> findByName(String name) {
-//		return this.repo.findByName(name);
-//	}
+	public List<Record> findByName(String name) {
+		return this.repo.findByName(name);
+	}
 //
 //	private List<Person> people = new ArrayList<>();
 //

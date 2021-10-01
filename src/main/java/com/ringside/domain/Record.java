@@ -1,5 +1,6 @@
 package com.ringside.domain;
-
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer; 
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -26,8 +27,10 @@ public class Record {
     
     private String winner;
     
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    @JsonFormat(pattern = "MM/dd/yyyy")
+   // @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+   // @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+  @JsonFormat(pattern = "dd-MM-yyyy")
+  //@JsonSerialize(using = ToStringSerializer.class)
     private LocalDate fightDate;
 
 	public Record(Long id, String contender1, String contender2, String winner, LocalDate fightDate) {

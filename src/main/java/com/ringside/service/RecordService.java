@@ -49,8 +49,8 @@ public class RecordService {
 
 
 	// CREATE
-	public Record create(Record p) {
-		return this.repo.saveAndFlush(p);
+	public Record create(Record r) {
+		return this.repo.saveAndFlush(r);
 	}
 
 	// READ ALL
@@ -74,13 +74,13 @@ public class RecordService {
 	}
 
 	// UPDATE
-	public Record updateId(Record p, Long id) {
+	public Record updateId(Record r, Long id) {
 		//Record exists = this.repo.findById(id).orElseThrow(PersonNotFoundException::new);
 		Record exists = this.repo.findById(id).orElseThrow();
-		exists.setContender1(p.getContender1());
-		exists.setContender2(p.getContender2());
-		exists.setWinner(p.getWinner());
-		exists.setFightDate(p.getFightDate());
+		exists.setContender1(r.getContender1());
+		exists.setContender2(r.getContender2());
+		exists.setWinner(r.getWinner());
+		exists.setFightDate(r.getFightDate());
 		return this.repo.saveAndFlush(exists);
 	}
 

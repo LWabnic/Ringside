@@ -16,6 +16,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 //import com.qa.springtest.repo.PersonRepo;
 import com.ringside.domain.Record;
+import com.ringside.exceptions.RecordNotFoundException;
 //import com.qa.springtest.dto.PersonDTO;
 import com.ringside.repo.RecordRepo;
 //import com.qa.springtest.exceptions.PersonNotFoundException;
@@ -66,8 +67,8 @@ public class RecordService {
 	// DELETE
 	public Boolean deleteId(Long id) {
 		if (!this.repo.existsById(id)) {
-			//throw new PersonNotFoundException();
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND,"No Person found");
+			throw new RecordNotFoundException();
+			//throw new ResponseStatusException(HttpStatus.NOT_FOUND,"No Person found");
 		}
 		this.repo.deleteById(id);
 		return !this.repo.existsById(id);
@@ -75,8 +76,8 @@ public class RecordService {
 
 	// UPDATE
 	public Record updateId(Record r, Long id) {
-		//Record exists = this.repo.findById(id).orElseThrow(PersonNotFoundException::new);
-		Record exists = this.repo.findById(id).orElseThrow();
+		Record exists = this.repo.findById(id).orElseThrow(RecordNotFoundException::new);
+		//Record exists = this.repo.findById(id).orElseThrow();
 		exists.setContender1(r.getContender1());
 		exists.setContender2(r.getContender2());
 		exists.setWinner(r.getWinner());
@@ -88,18 +89,5 @@ public class RecordService {
 	public List<Record> findByName(String name) {
 		return this.repo.findByName(name);
 	}
-//
-//	private List<Person> people = new ArrayList<>();
-//
-//	public List<Person> readAll() {
-//		List<Person> list = Arrays.asList(new Person(1L, "Bob", "Bobson"), new Person(2L, "Rob", "Robson"));
-//		return list;
-//	}
-//
-//	public boolean addPerson(@RequestBody Person person) {
-//		return this.people.add(person);
-//	}
-//	public PersonService(PersonRepo repo) {
-//		this.repo = repo;
-//	}
+
 }

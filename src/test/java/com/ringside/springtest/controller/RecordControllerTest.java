@@ -17,7 +17,6 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -47,94 +46,93 @@ import com.ringside.exceptions.RecordNotFoundException;
 @RunWith(SpringRunner.class)
 @WebMvcTest
 public class RecordControllerTest {
-@Autowired
-private MockMvc mvc;
-@Autowired
-private ObjectMapper mapper;
-@MockBean
-RecordService service;
+	@Autowired
+	private MockMvc mvc;
+	@Autowired
+	private ObjectMapper mapper;
+	@MockBean
+	RecordService service;
 
-@Test
-public void createTest() throws Exception{
-	Record r=new Record("Mike Tyson", "Lennox Lewis","Lennox Lewis",LocalDate.of(2002, 6, 8));
-	String rAsJson=this.mapper.writeValueAsString(r);
-	
-Mockito.when(this.service.create(r)).thenReturn(r);
-	
-	mvc.perform(post("/record/createR")
-			.contentType(MediaType.APPLICATION_JSON)
-			.content(rAsJson))
-			.andExpect(status().isCreated())
-			.andExpect(content().json(rAsJson));
-}
+	@Test
+	public void createTest() throws Exception {
+		Record r = new Record("Mike Tyson", "Lennox Lewis", "Lennox Lewis", LocalDate.of(2002, 6, 8));
+		String rAsJson = this.mapper.writeValueAsString(r);
 
-@Test
-public void readAllRTest() throws Exception{
-	List<Record> r = Arrays.asList(new Record(1L, "Mike Tyson", "Lennox Lewis","Lennox Lewis",LocalDate.of(2002, 6, 8)), new Record(2L, "Anthony Joshua", "Oleksandr Usyk","Aleksandr Usyk",LocalDate.of(2021, 9, 25)));
-	String rAsJson=this.mapper.writeValueAsString(r);
-	
-Mockito.when(this.service.readAllRecords()).thenReturn(r);
+		Mockito.when(this.service.create(r)).thenReturn(r);
 
-mvc.perform(get("/record/readR")).andExpect(status().isOk()).andExpect(content().json(rAsJson));
+		mvc.perform(post("/record/createR").contentType(MediaType.APPLICATION_JSON).content(rAsJson))
+				.andExpect(status().isCreated()).andExpect(content().json(rAsJson));
+	}
 
-}
-@Test
-public void readRTest() throws Exception{
-	Record r=new Record("Mike Tyson", "Lennox Lewis","Lennox Lewis",LocalDate.of(2002, 6, 8));
-	String rAsJson=this.mapper.writeValueAsString(r);
-	
-Mockito.when(this.service.readId(1L)).thenReturn(r);
+	@Test
+	public void readAllRTest() throws Exception {
+		List<Record> r = Arrays.asList(
+				new Record(1L, "Mike Tyson", "Lennox Lewis", "Lennox Lewis", LocalDate.of(2002, 6, 8)),
+				new Record(2L, "Anthony Joshua", "Oleksandr Usyk", "Aleksandr Usyk", LocalDate.of(2021, 9, 25)));
+		String rAsJson = this.mapper.writeValueAsString(r);
 
-mvc.perform(get("/record/readR/1")).andExpect(status().isOk()).andExpect(content().json(rAsJson));
+		Mockito.when(this.service.readAllRecords()).thenReturn(r);
 
-}
-@Test
-public void updateRTest() throws Exception{
-	Record r=new Record("Mike Tyson", "Lennox Lewis","Lennox Lewis",LocalDate.of(2002, 6, 8));
-	String rAsJson=this.mapper.writeValueAsString(r);
-	
-Mockito.when(this.service.updateId(r,1L)).thenReturn(r);
+		mvc.perform(get("/record/readR")).andExpect(status().isOk()).andExpect(content().json(rAsJson));
 
-mvc.perform(put("/record/updateR/1")
-		.contentType(MediaType.APPLICATION_JSON)
-		.content(rAsJson))
-		.andExpect(status().isAccepted())
-		.andExpect(content().json(rAsJson));
+	}
 
-}
+	@Test
+	public void readRTest() throws Exception {
+		Record r = new Record("Mike Tyson", "Lennox Lewis", "Lennox Lewis", LocalDate.of(2002, 6, 8));
+		String rAsJson = this.mapper.writeValueAsString(r);
 
-@Test
-public void deleteRSuccesTest() throws Exception{
-	
-Mockito.when(this.service.deleteId(1L)).thenReturn(true);
+		Mockito.when(this.service.readId(1L)).thenReturn(r);
 
-mvc.perform(delete("/record/deleteR/1")).andExpect(status().isNoContent());
+		mvc.perform(get("/record/readR/1")).andExpect(status().isOk()).andExpect(content().json(rAsJson));
 
-}
-@Test()
-public void deleteRFailTest() throws Exception{
-	
-	RecordNotFoundException ex=new RecordNotFoundException();
-	
-Mockito.when(this.service.deleteId(1L)).thenThrow(ex);
+	}
 
-mvc.perform(delete("/record/deleteR/1"))
-.andExpect(status().isNotFound())
-.andExpect(result -> assertTrue(result.getResolvedException() instanceof RecordNotFoundException))
-.andExpect(result -> assertEquals(null, result.getResolvedException().getMessage()));
-	      
+	@Test
+	public void updateRTest() throws Exception {
+		Record r = new Record("Mike Tyson", "Lennox Lewis", "Lennox Lewis", LocalDate.of(2002, 6, 8));
+		String rAsJson = this.mapper.writeValueAsString(r);
 
-}
-@Test
-public void findByNameTest() throws Exception{
-	List<Record> r = Arrays.asList(new Record(1L, "Mike Tyson", "Lennox Lewis","Lennox Lewis",LocalDate.of(2002, 6, 8)));
-	String rAsJson=this.mapper.writeValueAsString(r);
-	
-Mockito.when(this.service.findByName("Lennox%20Lewis")).thenReturn(r);
+		Mockito.when(this.service.updateId(r, 1L)).thenReturn(r);
 
-mvc.perform(get("/record/readname/Lennox%20Lewis")).andExpect(status().isOk()).andExpect(content().json(rAsJson));
+		mvc.perform(put("/record/updateR/1").contentType(MediaType.APPLICATION_JSON).content(rAsJson))
+				.andExpect(status().isAccepted()).andExpect(content().json(rAsJson));
 
-}
+	}
 
+	@Test
+	public void deleteRSuccesTest() throws Exception {
+
+		Mockito.when(this.service.deleteId(1L)).thenReturn(true);
+
+		mvc.perform(delete("/record/deleteR/1")).andExpect(status().isNoContent());
+
+	}
+
+	@Test()
+	public void deleteRFailTest() throws Exception {
+
+		RecordNotFoundException ex = new RecordNotFoundException();
+
+		Mockito.when(this.service.deleteId(1L)).thenThrow(ex);
+
+		mvc.perform(delete("/record/deleteR/1")).andExpect(status().isNotFound())
+				.andExpect(result -> assertTrue(result.getResolvedException() instanceof RecordNotFoundException))
+				.andExpect(result -> assertEquals(null, result.getResolvedException().getMessage()));
+
+	}
+
+	@Test
+	public void findByNameTest() throws Exception {
+		List<Record> r = Arrays
+				.asList(new Record(1L, "Mike Tyson", "Lennox Lewis", "Lennox Lewis", LocalDate.of(2002, 6, 8)));
+		String rAsJson = this.mapper.writeValueAsString(r);
+
+		Mockito.when(this.service.findByName("Lennox%20Lewis")).thenReturn(r);
+
+		mvc.perform(get("/record/readname/Lennox%20Lewis")).andExpect(status().isOk())
+				.andExpect(content().json(rAsJson));
+
+	}
 
 }

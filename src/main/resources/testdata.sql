@@ -1,0 +1,1 @@
+INSERT INTO `record` (`contender1`, `contender2`, `fight_date`, `winner`) VALUES ('Mike Tyson', 'Lennox Lewis','1999-8-9','Lennox Lewis');

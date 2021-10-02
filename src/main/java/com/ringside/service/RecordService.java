@@ -87,6 +87,7 @@ public class RecordService {
 
 	// Find by name
 	public List<Record> findByName(String name) {
+		
 		return this.repo.findByName(name);
 	}
 

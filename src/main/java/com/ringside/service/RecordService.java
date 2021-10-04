@@ -36,15 +36,18 @@ public class RecordService {
 //	public Record mapFromDTO(RecordDTO r) {
 //		return this.mapper.map(r, Record.class);
 //	}
-//
-//	// Create for DTo
-//	public RecordDTO createDTO(RecordDTO r) {
-//		Record saveIt = this.mapFromDTO(r);
-//		Record saved = this.repo.save(saveIt);
-//		return this.mapToDTO(saved);
-//	}
-//		
-//		
+
+	// Create for DTo
+	public RecordDTO createDTO(RecordDTO r) {
+		
+		
+		Record saveIt = this.mapper.map(r,Record.class);
+		
+		Record saved = this.repo.save(saveIt);
+		return this.mapper.map(saved, RecordDTO.class);
+	}
+		
+		
 
 	// CREATE
 	public Record create(Record r) {

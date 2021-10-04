@@ -34,6 +34,8 @@ public class RecordServiceTest {
 //The class i will be mocking
 	@Mock
 	private RecordRepo repo;
+	@Mock
+	private ModelMapper mapper;
 
 	@Test
 	public void createTest() {
@@ -151,33 +153,18 @@ public class RecordServiceTest {
 		assertEquals(this.repo.findByName("Lennox Lewis"), this.service.findByName("Lennox Lewis"));
 
 	}
-//	@Test
-//	public void mapToDTOtest() {
-//		RecordDTO rDto = new RecordDTO(1L, "Mike Tyson", "Lennox Lewis","Lennox Lewis");
-//		Record input = new Record(1L, "Mike Tyson", "Lennox Lewis","Lennox Lewis",LocalDate.of(2002, 6, 8));
-//		
-//		this.service.mapToDTO(input);
-//		this.service.mapFromDTO(rDto);
-//		Mockito.when(this.service.createDTO(rDto)).thenReturn(rDto);
-//		
-//		assertEquals(rDto, this.service.createDTO(rDto));
-//		
-//		
-//	}
+	@Test
+	public void mapToDTOtest() {
+		RecordDTO rDto = new RecordDTO(1L, "Mike Tyson", "Lennox Lewis","Lennox Lewis");
+		Record input = new Record(1L, "Mike Tyson", "Lennox Lewis","Lennox Lewis",LocalDate.of(2002, 6, 8));
+		
+		Mockito.when(this.mapper.map(rDto,Record.class)).thenReturn(input);
+		Mockito.when(this.repo.save(input)).thenReturn(input);
+		Mockito.when(this.mapper.map(input,RecordDTO.class)).thenReturn(rDto);
+		assertEquals(rDto, this.service.createDTO(rDto));
+		
+	
+	}
 
-//	//Map to Dto
-//	public RecordDTO mapToDTO(Record r) {
-//		return this.mapper.map(r, RecordDTO.class);
-//	}
-//	//Map from Dto
-//		public Record mapFromDTO(RecordDTO r) {
-//			return this.mapper.map(r, Record.class);
-//		}
-//	//Create for DTo
-//		public RecordDTO createDTO(RecordDTO r) {
-//			Record saveIt=this.mapFromDTO(r);
-//			Record saved=this.repo.save(saveIt);
-//			return this.mapToDTO(saved);
-//		}
 
 }

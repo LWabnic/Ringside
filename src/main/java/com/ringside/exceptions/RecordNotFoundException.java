@@ -3,11 +3,9 @@ package com.ringside.exceptions;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-@ResponseStatus(code=HttpStatus.NOT_FOUND,reason="Record doesn't exist")
+@ResponseStatus(code = HttpStatus.NOT_FOUND, reason = "Record doesn't exist")
 public class RecordNotFoundException extends RuntimeException {
 
 	private static final long serialVersionUID = -3238006991036536330L;
-
-	
 
 }

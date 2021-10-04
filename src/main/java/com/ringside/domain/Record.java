@@ -1,6 +1,7 @@
 package com.ringside.domain;
+
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer; 
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -15,23 +16,20 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
-@Table(name="Record")
+@Table(name = "Record")
 public class Record {
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Long id;
-    
-    private String contender1;
-    
-    private String contender2;
-    
-    private String winner;
-    
-   // @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-   // @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
-  @JsonFormat(pattern = "dd-MM-yyyy")
-  //@JsonSerialize(using = ToStringSerializer.class)
-    private LocalDate fightDate;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
+	private String contender1;
+
+	private String contender2;
+
+	private String winner;
+
+	@JsonFormat(pattern = "dd-MM-yyyy")
+	private LocalDate fightDate;
 
 	public Record(Long id, String contender1, String contender2, String winner, LocalDate fightDate) {
 		super();
@@ -41,7 +39,7 @@ public class Record {
 		this.winner = winner;
 		this.fightDate = fightDate;
 	}
-    
+
 	public Record(String contender1, String contender2, String winner, LocalDate fightDate) {
 		super();
 		this.contender1 = contender1;
@@ -49,15 +47,17 @@ public class Record {
 		this.winner = winner;
 		this.fightDate = fightDate;
 	}
+
 	public Record() {
 		super();
 
 	}
+
 	public Record(Long id, String winner) {
 		super();
 		this.id = id;
 		this.winner = winner;
-	
+
 	}
 
 	public Long getId() {
@@ -124,7 +124,5 @@ public class Record {
 		return "Record [id=" + id + ", contender1=" + contender1 + ", contender2=" + contender2 + ", winner=" + winner
 				+ ", fightDate=" + fightDate + "]";
 	}
-    
-    
-}
 
+}

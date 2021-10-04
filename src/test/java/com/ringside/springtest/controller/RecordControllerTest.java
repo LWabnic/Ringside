@@ -55,7 +55,7 @@ public class RecordControllerTest {
 
 	@Test
 	public void createTest() throws Exception {
-		Record r = new Record("Mike Tyson", "Lennox Lewis", "Lennox Lewis", LocalDate.of(2002, 6, 8));
+		Record r = new Record(1L, "Mike Tyson", "Lennox Lewis", "Lennox Lewis", LocalDate.of(2002, 6, 8));
 		String rAsJson = this.mapper.writeValueAsString(r);
 
 		Mockito.when(this.service.create(r)).thenReturn(r);
@@ -79,7 +79,7 @@ public class RecordControllerTest {
 
 	@Test
 	public void readRTest() throws Exception {
-		Record r = new Record("Mike Tyson", "Lennox Lewis", "Lennox Lewis", LocalDate.of(2002, 6, 8));
+		Record r = new Record(1L, "Mike Tyson", "Lennox Lewis", "Lennox Lewis", LocalDate.of(2002, 6, 8));
 		String rAsJson = this.mapper.writeValueAsString(r);
 
 		Mockito.when(this.service.readId(1L)).thenReturn(r);
@@ -90,7 +90,7 @@ public class RecordControllerTest {
 
 	@Test
 	public void updateRTest() throws Exception {
-		Record r = new Record("Mike Tyson", "Lennox Lewis", "Lennox Lewis", LocalDate.of(2002, 6, 8));
+		Record r = new Record(1L, "Mike Tyson", "Lennox Lewis", "Lennox Lewis", LocalDate.of(2002, 6, 8));
 		String rAsJson = this.mapper.writeValueAsString(r);
 
 		Mockito.when(this.service.updateId(r, 1L)).thenReturn(r);

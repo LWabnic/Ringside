@@ -11,43 +11,40 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.server.ResponseStatusException;
 
-
-
-
-//import com.qa.springtest.repo.PersonRepo;
 import com.ringside.domain.Record;
+import com.ringside.dto.RecordDTO;
 import com.ringside.exceptions.RecordNotFoundException;
-//import com.qa.springtest.dto.PersonDTO;
 import com.ringside.repo.RecordRepo;
-//import com.qa.springtest.exceptions.PersonNotFoundException;
 
 @Service
 public class RecordService {
 	private ModelMapper mapper;
 	private RecordRepo repo;
-	
-	@Autowired
-	public RecordService(RecordRepo repo,ModelMapper mapper) {
-		this.repo=repo;
-		this.mapper=mapper;
-	}
-//	//Map to Dto
-//	public PersonDTO mapToDTO(Person p) {
-//		return this.mapper.map(p, PersonDTO.class);
-//	}
-//	//Map from Dto
-//		public Person mapFromDTO(PersonDTO p) {
-//			return this.mapper.map(p, Person.class);
-//		}
-//	//Create for DTo
-//		public PersonDTO createDTO(PersonDTO p) {
-//			Person saveIt=this.mapFromDTO(p);
-//			Person saved=this.repo.save(saveIt);
-//			return this.mapToDTO(saved);
-//		}
-//		
-		
 
+	@Autowired
+	public RecordService(RecordRepo repo, ModelMapper mapper) {
+		this.repo = repo;
+		this.mapper = mapper;
+	}
+
+//	// Map to Dto
+//	public RecordDTO mapToDTO(Record r) {
+//		return this.mapper.map(r, RecordDTO.class);
+//	}
+//
+//	// Map from Dto
+//	public Record mapFromDTO(RecordDTO r) {
+//		return this.mapper.map(r, Record.class);
+//	}
+//
+//	// Create for DTo
+//	public RecordDTO createDTO(RecordDTO r) {
+//		Record saveIt = this.mapFromDTO(r);
+//		Record saved = this.repo.save(saveIt);
+//		return this.mapToDTO(saved);
+//	}
+//		
+//		
 
 	// CREATE
 	public Record create(Record r) {
@@ -68,7 +65,7 @@ public class RecordService {
 	public Boolean deleteId(Long id) {
 		if (!this.repo.existsById(id)) {
 			throw new RecordNotFoundException();
-			//throw new ResponseStatusException(HttpStatus.NOT_FOUND,"No Person found");
+			// throw new ResponseStatusException(HttpStatus.NOT_FOUND,"No Person found");
 		}
 		this.repo.deleteById(id);
 		return !this.repo.existsById(id);
@@ -77,7 +74,7 @@ public class RecordService {
 	// UPDATE
 	public Record updateId(Record r, Long id) {
 		Record exists = this.repo.findById(id).orElseThrow(RecordNotFoundException::new);
-		//Record exists = this.repo.findById(id).orElseThrow();
+		// Record exists = this.repo.findById(id).orElseThrow();
 		exists.setContender1(r.getContender1());
 		exists.setContender2(r.getContender2());
 		exists.setWinner(r.getWinner());
@@ -87,7 +84,7 @@ public class RecordService {
 
 	// Find by name
 	public List<Record> findByName(String name) {
-		
+
 		return this.repo.findByName(name);
 	}
 

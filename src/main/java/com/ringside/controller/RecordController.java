@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ringside.domain.Record;
+import com.ringside.dto.RecordDTO;
 import com.ringside.service.RecordService;
 
 @RequestMapping("/record")
@@ -53,14 +54,15 @@ public class RecordController {
 	public ResponseEntity<Boolean> deleteR(@PathVariable Long id) {
 		return new ResponseEntity<Boolean>(this.service.deleteId(id), HttpStatus.NO_CONTENT);
 	}
-	//Find by name
+
+	// Find by name
 	@GetMapping("/readname/{name}")
-	public ResponseEntity<List<Record>>findByName(@PathVariable String name){
-		return new ResponseEntity<List<Record>>(this.service.findByName(name),HttpStatus.OK);
+	public ResponseEntity<List<Record>> findByName(@PathVariable String name) {
+		return new ResponseEntity<List<Record>>(this.service.findByName(name), HttpStatus.OK);
 	}
-//	//create
+	// create for DTO
 //	@PostMapping("/createDTO")
-//	public ResponseEntity<PersonDTO>createDTO(@RequestBody PersonDTO p){
-//		return new ResponseEntity<PersonDTO>(this.service.createDTO(p),HttpStatus.CREATED);
+//	public ResponseEntity<RecordDTO>createDTO(@RequestBody RecordDTO r){
+//		return new ResponseEntity<RecordDTO>(this.service.createDTO(r),HttpStatus.CREATED);
 //	}
 }

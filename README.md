@@ -61,6 +61,11 @@ _Record Controller Class Integration Test_
 
 ![RecordController Intrgration Test](https://user-images.githubusercontent.com/89149294/135907673-9fbd9198-fa5e-49f2-b5e3-b7b45a3d972b.PNG) 
 
+_Maven Test Report_
+
+![Maven test](https://user-images.githubusercontent.com/89149294/136019288-f4e8a442-ab10-4981-ad89-9715b39e72e5.PNG)
+
+
 # *Link to Jira Board - You must add both Pawel and Anoush as collaborators also.  
 
 https://qalw.atlassian.net/jira/software/projects/QAP/boards/1
